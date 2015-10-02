@@ -440,7 +440,7 @@ static CGSize CGSizeScale(CGSize size, CGFloat scale) {
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    if (self.imagePickerController.mediaType==QBImagePickerMediaTypeVideo || self.fetchResult.count==0) {
+    if (YES || self.imagePickerController.mediaType==QBImagePickerMediaTypeVideo || self.fetchResult.count==0) {
         return self.fetchResult.count;
     }
     return self.fetchResult.count+1;
@@ -448,12 +448,12 @@ static CGSize CGSizeScale(CGSize size, CGFloat scale) {
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (self.imagePickerController.mediaType!=QBImagePickerMediaTypeVideo && indexPath.row==0) {
+    if (self.imagePickerController.mediaType!=QBImagePickerMediaTypeVideo && indexPath.row==0 && NO) {
         QBAssetCameraCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"AssetCameraCell" forIndexPath:indexPath];
         return cell;
         
     }else {
-        NSUInteger item = self.imagePickerController.mediaType==QBImagePickerMediaTypeVideo?indexPath.item:indexPath.item-1;
+        NSUInteger item = (self.imagePickerController.mediaType==QBImagePickerMediaTypeVideo || YES) ?indexPath.item:indexPath.item-1;
         
         QBAssetCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"AssetCell" forIndexPath:indexPath];
         cell.tag = item;
@@ -504,7 +504,7 @@ static CGSize CGSizeScale(CGSize size, CGFloat scale) {
         return cell;
     }
 }
-
+/*
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
 {
     if (kind == UICollectionElementKindSectionFooter) {
@@ -563,7 +563,7 @@ static CGSize CGSizeScale(CGSize size, CGFloat scale) {
     
     return nil;
 }
-
+*/
 
 #pragma mark - UICollectionViewDelegate
 
