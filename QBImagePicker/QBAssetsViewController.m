@@ -391,10 +391,10 @@ static CGSize CGSizeScale(CGSize size, CGFloat scale) {
         PHFetchResultChangeDetails *collectionChanges = [changeInstance changeDetailsForFetchResult:self.fetchResult];
         
         if (collectionChanges) {
-            // Get the new fetch result
-            self.fetchResult = [collectionChanges fetchResultAfterChanges];
-            
             if (![collectionChanges hasIncrementalChanges] || [collectionChanges hasMoves]) {
+                // Get the new fetch result
+                self.fetchResult = [collectionChanges fetchResultAfterChanges];
+
                 // We need to reload all if the incremental diffs are not available
                 [self.collectionView reloadData];
             } else {
@@ -414,6 +414,8 @@ static CGSize CGSizeScale(CGSize size, CGFloat scale) {
                     if ([changedIndexes count]) {
                         [self.collectionView reloadItemsAtIndexPaths:[changedIndexes qb_indexPathsFromIndexesWithSection:0]];
                     }
+                    // Get the new fetch result
+                    self.fetchResult = [collectionChanges fetchResultAfterChanges];
                 } completion:NULL];
             }
             
