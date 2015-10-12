@@ -571,10 +571,10 @@ static CGSize CGSizeScale(CGSize size, CGFloat scale) {
 
 - (BOOL)collectionView:(UICollectionView *)collectionView shouldSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (self.imagePickerController.mediaType!=QBImagePickerMediaTypeVideo && indexPath.row==0) {
+    if (self.imagePickerController.mediaType!=QBImagePickerMediaTypeVideo && indexPath.row==0 && NO) {
         return YES;
     }else {
-        NSUInteger item = self.imagePickerController.mediaType==QBImagePickerMediaTypeVideo?indexPath.item:indexPath.item-1;
+        NSUInteger item = self.imagePickerController.mediaType==QBImagePickerMediaTypeVideo || YES?indexPath.item:indexPath.item-1;
         
         if ([self.imagePickerController.delegate respondsToSelector:@selector(qb_imagePickerController:shouldSelectAsset:)]) {
             PHAsset *asset = self.fetchResult[item];
@@ -591,7 +591,7 @@ static CGSize CGSizeScale(CGSize size, CGFloat scale) {
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (self.imagePickerController.mediaType!=QBImagePickerMediaTypeVideo && indexPath.row==0) {
+    if (self.imagePickerController.mediaType!=QBImagePickerMediaTypeVideo && indexPath.row==0 && NO) {
         
         QBImagePickerController *imagePickerController = self.imagePickerController;
         
@@ -600,7 +600,7 @@ static CGSize CGSizeScale(CGSize size, CGFloat scale) {
         }
         
     }else {
-        NSUInteger item = self.imagePickerController.mediaType==QBImagePickerMediaTypeVideo?indexPath.item:indexPath.item-1;
+        NSUInteger item = (self.imagePickerController.mediaType==QBImagePickerMediaTypeVideo||YES)?indexPath.item:indexPath.item-1;
         
         QBImagePickerController *imagePickerController = self.imagePickerController;
         NSMutableOrderedSet *selectedAssets = imagePickerController.selectedAssets;
@@ -652,11 +652,11 @@ static CGSize CGSizeScale(CGSize size, CGFloat scale) {
 
 - (void)collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (self.imagePickerController.mediaType!=QBImagePickerMediaTypeVideo && indexPath.row==0) {
+    if (self.imagePickerController.mediaType!=QBImagePickerMediaTypeVideo && indexPath.row==0 && NO) {
         
         
     }else {
-        NSUInteger item = self.imagePickerController.mediaType==QBImagePickerMediaTypeVideo?indexPath.item:indexPath.item-1;
+        NSUInteger item = (self.imagePickerController.mediaType==QBImagePickerMediaTypeVideo||YES)?indexPath.item:indexPath.item-1;
     
         if (!self.imagePickerController.allowsMultipleSelection) {
             return;
